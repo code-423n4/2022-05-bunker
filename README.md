@@ -45,7 +45,7 @@ Under "SPONSORS ADD INFO HERE" heading below, include the following:
 
 ---
 
-# Bunker Finance contest details
+# bunker.finance contest details
 - $28,500 USDC main award pot
 - $1,500 USDC gas optimization award pot
 - Join [C4 Discord](https://discord.gg/code4rena) to register
