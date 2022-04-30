@@ -2,9 +2,9 @@
 
 This `README.md` contains a set of checklists for our contest collaboration.
 
-Your contest will use two repos: 
+Your contest will use two repos:
 - **a _contest_ repo** (this one), which is used for scoping your contest and for providing information to contestants (wardens)
-- **a _findings_ repo**, where issues are submitted. 
+- **a _findings_ repo**, where issues are submitted.
 
 Ultimately, when we launch the contest, this contest repo will be made public and will contain the smart contracts to be reviewed and all the information needed for contest participants. The findings repo will be made public after the contest is over and your team has mitigated the identified issues.
 
@@ -56,4 +56,52 @@ Under "SPONSORS ADD INFO HERE" heading below, include the following:
 
 This repo will be made public before the start of the contest. (C4 delete this line when made public)
 
-[ ⭐️ SPONSORS ADD INFO HERE ]
+# Resources
+
+- [Code on Github](https://github.com/bunkerfinance/bunker-protocol/tree/79e723a29edeae64554eebbdba33eeecab62c861)
+
+# Contest Scope
+
+This protocol is a fork of Compound 2.9 that allows users to collateralize ERC721s, ERC1155s, and CryptoPunks.
+
+To learn more about Compound, you can read the documentation here:
+- [Compound Documentation](https://compound.finance/docs)
+
+The following contracts/functions are part of the audit scope:
+
+## CNft.sol (253 LoC)
+
+This contract implements an ennumerable version of ERC1155 token standard. It can wrap an ERC721, ERC1155, or CryptoPunk. cNFT represents a collateralized NFT, similar to how cTokens represent collateralized Ether or ERC20s.
+
+This contract uses the following external libraries:
+- `@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol`
+- `@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol`
+- `@openzeppelin/contracts/interfaces/IERC1155.sol`
+- `@openzeppelin/contracts/interfaces/IERC721.sol`
+- `@openzeppelin/contracts/utils/introspection/ERC165.sol`
+- `@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol`
+- `@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol`
+- `@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol`
+
+This contract also uses the `ERC1155Enumerable.sol`, which is also in scope for this contest. Details in the next section.
+
+## ERC1155Enumerable.sol (72 LoC)
+
+This contract implements an enumerable version of ERC1155 that allows for enumerating the NFTs an address owns.
+
+This contract uses the following libraries:
+- `@openzeppelin/contracts/interfaces/IERC1155.sol`
+- `@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155Upgradeable.sol`
+- `./EnumerableUintSet.sol` (a subset of OpenZeppelin's `EnumerableSet.sol`)
+
+## PriceOracleImplementation.sol (42 LoC)
+
+This contract is Bunker's implementation of Compound's `PriceOracle` interface. It makes an external call to the USDC/ETH Chainlink feed.
+
+## CErc20.sol and CEther.sol (~4 SLoC added each), CToken.sol (~95 SLoC added)
+
+The `liquidateBorrowNft` function in `CErc20.sol`/`CEther.sol` and `liquidateBorrowNftInternal`/`liquidateBorrowNftFresh` functions in `CToken.sol` are in scope for this contest. They are the code paths used for liquidating cNFTs. No additional libraries are used.
+
+## Comptroller.sol (See [here](https://github.com/bunkerfinance/bunker-protocol/commit/79e723a29edeae64554eebbdba33eeecab62c861) for diff from Compound 2.9, about ~140 SLoC changed)
+
+This contract contains logic for accounting of cNFTs and dictating when certain actions (e.g. supplying/borrowing/liquidating) are allowed. No additional libraries are used.
