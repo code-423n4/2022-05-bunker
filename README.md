@@ -60,6 +60,10 @@ This repo will be made public before the start of the contest. (C4 delete this l
 
 - [Code on Github](https://github.com/bunkerfinance/bunker-protocol/tree/79e723a29edeae64554eebbdba33eeecab62c861)
 
+## Non-Concerns
+
+We do not plan to add any ERC777-backed cTokens to Bunker, so any vulnerabilities (e.g. any known vulnerabilities in Compound) that require the underlying to be an ERC777 (or similar) are not in the scope of this contest.
+
 # Contest Scope
 
 This protocol is a fork of Compound 2.9 that allows users to collateralize ERC721s, ERC1155s, and CryptoPunks.
