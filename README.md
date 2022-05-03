@@ -5,7 +5,7 @@
 - Submit findings [using the C4 form](https://code4rena.com/contests/2022-05-bunkerfinance-contest/submit)
 - [Read our guidelines for more details](https://docs.code4rena.com/roles/wardens)
 - Starts May 3, 2022 00:00 UTC
-- Ends May 5, 2022 23:59 UTC
+- Ends May 7, 2022 23:59 UTC
 
 # Resources
 
